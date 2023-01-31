@@ -5,14 +5,16 @@
             <v-row class="d-flex justify-center mb-6">
                 <v-col cols="12" md="4">
                     <v-form>
-                        <v-text-field type="text" name="todo_input" placeholder="Write a task" v-model="taskText" required></v-text-field>
+                        <v-text-field type="text" name="todo-input" placeholder="Write a task" v-model="taskText" required></v-text-field>
                         <v-btn color="primary" @click="addTask">Add task</v-btn>
                     </v-form>
-                    <div class="taskList">
-                        <v-list-item class="todoItem" v-for="(task, id) in tasks" :key="id" >
-                          <span :class="{done:isDone}"> {{ task }}</span>             
-                            <v-list-item-action class="taskCheck">
-                                <v-checkbox v-model="isDone" :input-value="active" color="teal darken-2"></v-checkbox>
+                    <div class="task-list">
+                      <h2 class="todo-title" v-if="tasks.length">Task list:</h2>
+                        <v-list-item class="todo-item" v-for="(task, index) in tasks" :key="task.id" >
+                          <span>{{ index + 1 }}.</span>
+                          <span :class="{done:task.isComplite}"> {{ task.text }}</span>             
+                            <v-list-item-action class="task-check">
+                                <v-checkbox v-model="task.isComplite" :input-value="active" color="teal darken-2"></v-checkbox>
                             </v-list-item-action>
                         </v-list-item>
                     </div>
@@ -36,13 +38,32 @@ export default {
         return {
             taskText: "",
             tasks: [],
-            isDone: false
+            isDone: false,
+            id:0
         }
+    },
+    mounted(){
+      const data = localStorage.getItem('tasks');
+      if(data){
+        this.tasks = JSON.parse(data);
+      }
+
+     
     },
     methods: {
         addTask() {
-            this.tasks.push(this.taskText);
+            this.tasks.push({
+              id:this.id,
+              text: this.taskText,
+              isComplite: this.isDone
+            });
+            localStorage.setItem('tasks', JSON.stringify(this.tasks))
             this.taskText = "";
+        },
+        checkTask(){
+         if (!this.task.isComplite){
+          localStorage.setItem('checks', JSON.stringify(this.task.isComplite))
+         }
         }
     }
 }
@@ -58,18 +79,26 @@ export default {
     margin-top: 60px;
 }
 
-.todoItem {
-    border: 2px solid #26A69A;
-    border-radius: 4px;
-    margin-bottom: 10px;
+.todo{ 
+&-item {
+  border: 2px solid #26A69A;
+  border-radius: 4px;
+  margin-bottom: 10px;
+} 
+
 }
 
-.taskCheck {
+
+.task-check {
     margin-left: 5px;
 }
 
-.taskList{
-  margin-top: 30px;
+.task-list{
+  margin-top: 40px;
+}
+
+.todo-title{
+  margin-bottom: 30px;
 }
 
 .done{
