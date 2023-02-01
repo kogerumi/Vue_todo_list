@@ -1,6 +1,6 @@
 {
-  "name": "todo_list",
   "homepage": "https://github.com/DeepViolet777/Vue_todo_list",
+  "name": "todo_list",
   "version": "0.1.0",
   "private": true,
   "scripts": {
