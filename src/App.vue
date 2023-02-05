@@ -1,5 +1,5 @@
 <template>
-<div class="app">
+<div>
     <v-app class="todo">
         <v-container class="container">
             <v-row class="d-flex justify-center mb-6">
@@ -16,6 +16,11 @@
                             <v-list-item-action class="task-check">
                                 <v-checkbox @change="checkTask" v-model="task.isComplite" :input-value="active" color="teal darken-2"></v-checkbox>
                             </v-list-item-action>
+                          
+                            <v-icon class="delete-btn"  @click="DeleteTask(i)">
+                                mdi-close-box-outline
+                            </v-icon>
+                       
                         </v-list-item>
                     </div>
                 </v-col>
@@ -56,12 +61,17 @@ export default {
                 text: this.taskText,
                 isComplite: this.isDone
             });
-            localStorage.setItem('tasks', JSON.stringify(this.tasks))
+            localStorage.setItem('tasks', JSON.stringify(this.tasks));
             this.taskText = "";
         },
         checkTask() {
-            localStorage.setItem('tasks', JSON.stringify(this.tasks))
-            
+            localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+        },
+
+        DeleteTask(i){
+            this.tasks.splice(i, 1);
+            localStorage.setItem('tasks', JSON.stringify(this.tasks));
         }
     }
 }
@@ -82,6 +92,8 @@ export default {
         border: 2px solid #26A69A;
         border-radius: 4px;
         margin-bottom: 10px;
+        display: flex;
+
     }
 
 }
@@ -102,4 +114,11 @@ export default {
     color: rgb(139, 139, 139);
     text-decoration: line-through;
 }
+
+.delete-btn {
+    margin-left: auto;
+    cursor: pointer;
+
+}
+
 </style>
