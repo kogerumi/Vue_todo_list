@@ -5,8 +5,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-      count: 0
+      tasks:[]
     },
+    
+mutations: {
+  addTask (state, task) {
+    state.tasks.push(task)
+  }
+}
 });
 
 
