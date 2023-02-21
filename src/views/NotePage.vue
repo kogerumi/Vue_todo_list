@@ -5,25 +5,45 @@
             <v-row class="d-flex justify-center mb-6">
                 <v-col cols="12" md="4">
                     <h1 class="note-title" v-if="!editing" @dblclick="editing = true">{{noteTitle}}</h1>
-                    <v-text-field :value="titleForm" @focus="startEdit" @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" color="primary" maxlength="1023" ref="input" placeholder="Note title" v-else v-focus="editing">
+                    <v-text-field :value="titleForm"
+                     @focus="startEdit" 
+                     @blur="doneEdit" 
+                     @keyup.enter="doneEdit" 
+                     @keyup.esc="cancelEdit" 
+                     color="primary" maxlength="1023" 
+                     ref="input" placeholder="Note title" 
+                     v-else v-focus="editing">
                     </v-text-field>
+                   
+                    
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col>
+                    <task-form/> 
+                </v-col>
+            </v-row>
+           
+                <todo-list/>
+              
         </v-container>
 
     </v-app>
 
-    <todo-list />
+    
 
 </div>
 </template>
 
 <script>
 import TodoList from '@/components/TodoList';
+import TaskForm from '@/components/TaskForm';
+
 export default {
     name: 'NotePage',
     components: {
-        TodoList
+        TodoList,
+        TaskForm
     },
     data() {
         return {

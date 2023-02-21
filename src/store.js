@@ -5,7 +5,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-      tasks:[]
+      tasks:[],
+    //   task:{
+    //     id:0,
+    //     text:"",
+    //     isDone:false
+    // }
     },
     
 mutations: {
@@ -16,4 +21,4 @@ mutations: {
 });
 
 
-export default store;
+export default store

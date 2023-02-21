@@ -24,59 +24,66 @@ export default {
             taskText: "",
             isDone: false,
             task: {
+                id: this.id,
                 text: this.taskText,
+                isComplite: this.isDone
+                // },
+                // isDone: false,
+                // id: 0,
+                // isEdit: false
             }
+        }
 
-        };
     },
 
-    methods: {
-        addTask() {
-            const text = this.taskText.trim()
-            if (text) {
-                // this.$emit('addTask', this.task);
-                this.task = {
-                    id: this.id++,
-                    text: text,
-                    isComplite: this.isDone
-                }
-                this.$store.commit('addTask', this.task)
-                this.taskText = "";
+
+methods: {
+    addTask() {
+        const text = this.taskText.trim()
+        if (text) {
+            // this.$emit('addTask', this.task);
+            this.task = {
+                id: this.id++,
+                text: text,
+                isComplite: this.isDone
             }
-            // console.log(this.task)
-            console.log(this.$store.state.tasks)
-        },
-        // if (this.isEdit === false) {
-        //     this.id++;
-        //     this.tasks.push({
-        //         id: this.id,
-        //         text: this.taskText,
-        //         isComplite: this.isDone
-        //     });
-        //     localStorage.setItem('tasks', JSON.stringify(this.tasks));
-        //     this.taskText = "";
-        // } else {
+            this.$store.commit('addTask', this.task)
+            this.taskText = "";
+        }
+        // console.log(this.task)
+  console.log(this.$store.state.tasks)
+    },
+    // if (this.isEdit === false) {
+    //     this.id++;
+    //     this.tasks.push({
+    //         id: this.id,
+    //         text: this.taskText,
+    //         isComplite: this.isDone
+    //     });
+    //     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    //     this.taskText = "";
+    // } else {
 
-        //     this.tasks.map(function (item) {
-        //         if (item.id === this.task.id) {
-        //             this.task.text = this.taskText;
-        //         }
-        //     });
-        //     // this.isEdit = false;
-        // }
-        //  this.task.text = this.taskText;
-        //if (this.isEdit === true && ){
-        //    let currentTask = this.tasks.filter(task => task.text === this.taskText)
-        //   currentTask.text = this.taskText;
-        //   console.log(currentTask)
-        // this.isEdit = false;
+    //     this.tasks.map(function (item) {
+    //         if (item.id === this.task.id) {
+    //             this.task.text = this.taskText;
+    //         }
+    //     });
+    //     // this.isEdit = false;
+    // }
+    //  this.task.text = this.taskText;
+    //if (this.isEdit === true && ){
+    //    let currentTask = this.tasks.filter(task => task.text === this.taskText)
+    //   currentTask.text = this.taskText;
+    //   console.log(currentTask)
+    // this.isEdit = false;
 
-        //     this.task.text = this.taskText;
+    //     this.task.text = this.taskText;
 
-        //     this.taskText = "";
-        //     // 
+    //     this.taskText = "";
+    //     // 
 
-    }
+}
 }
 </script>
 

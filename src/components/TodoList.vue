@@ -9,8 +9,14 @@
                         <v-btn color="primary" @click="addTask">Add task</v-btn>
                     </v-form> -->
                    
-                    <div class="task-list">
-                        <h2 class="todo-title" v-if="tasks.length">Task list:</h2>
+            
+                        <!-- <v-list-item> -->
+                            <todo-item  v-for="task in tasks" :key="task.id" :text="task.text"/> 
+                            
+                        
+                           <!-- {{ tasks }} -->
+                        <!-- </v-list-item> -->
+                        <!-- <h2 class="todo-title" v-if="tasks.length">Task list:</h2> -->
                         <!-- <v-list-item class="todo-item" v-for="(task, index) in tasks" :key="task.id">
                             <span>{{ index + 1 }}.</span>
                             <span :class="{done:task.isComplite}"> {{ task.text }}</span>
@@ -27,10 +33,8 @@
                             </div>
 
                         </v-list-item> -->
-                        <v-list-item>
-                            <todo-item/>
-                        </v-list-item>
-                    </div>
+                       
+             
                 </v-col>
             </v-row>
         </v-container>
@@ -40,7 +44,7 @@
 </template>
 
 <script>
-import TodoItem from './TodoItem.vue';
+import TodoItem from './TodoItem';
 export default {
     name: 'todo-list',
 
@@ -50,45 +54,49 @@ export default {
 
     data() {
         return {
-            taskText: "",
-            tasks: [],
-            // task: {
-            //     id: this.id,
-            //     text: this.taskText,
-            //     isComplite: this.isDone
-            // },
-            isDone: false,
-            id: 0,
-            isEdit: false
+            tasks: this.$store.state.tasks,
+            // taskText: "",
+            // tasks: [],
+            // // task: {
+            // //     id: this.id,
+            // //     text: this.taskText,
+            // //     isComplite: this.isDone
+            // // },
+            // isDone: false,
+            // id: 0,
+            // isEdit: false
         }
     },
-    mounted() {
-        const data = localStorage.getItem('tasks');
-        if (data) {
-            this.tasks = JSON.parse(data);
-        }
+    // mounted() {
+    //     const data = localStorage.getItem('tasks');
+    //     if (data) {
+    //         this.tasks = JSON.parse(data);
+    //     }
 
-    },
+    // },
     methods: {
-        addTask() {
-            if (this.isEdit === false) {
-                this.id++;
-                this.tasks.push({
-                    id: this.id,
-                    text: this.taskText,
-                    isComplite: this.isDone
-                });
-                localStorage.setItem('tasks', JSON.stringify(this.tasks));
-                this.taskText = "";
-            } else {
+    //     addTask() {
+    //         this.$store.commit('addTask')
+    // console.log(this.$store.state.tasks)
+    //     },
+            // if (this.isEdit === false) {
+            //     this.id++;
+            //     this.tasks.push({
+            //         id: this.id,
+            //         text: this.taskText,
+            //         isComplite: this.isDone
+            //     });
+            //     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+            //     this.taskText = "";
+            // } else {
 
-                this.tasks.map(function (item) {
-                    if (item.id === this.task.id) {
-                        this.task.text = this.taskText;
-                    }
-                });
+            //     this.tasks.map(function (item) {
+            //         if (item.id === this.task.id) {
+            //             this.task.text = this.taskText;
+            //         }
+            //     });
                 // this.isEdit = false;
-            }
+            //}
             //  this.task.text = this.taskText;
             //if (this.isEdit === true && ){
             //    let currentTask = this.tasks.filter(task => task.text === this.taskText)
@@ -101,24 +109,30 @@ export default {
             //     this.taskText = "";
             //     // 
 
-        },
-        checkTask() {
-            localStorage.setItem('tasks', JSON.stringify(this.tasks));
-        },
+       // },
+        // checkTask() {
+        //     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        // },
 
-        deleteTask(i) {
-            this.tasks.splice(i, 1);
-            localStorage.setItem('tasks', JSON.stringify(this.tasks));
-        },
+        // deleteTask(i) {
+        //     this.tasks.splice(i, 1);
+        //     localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        // },
 
-        editTask(task) {
-            this.isEdit = true;
-            this.id = task.id
-            this.taskText = task.text;
-            // this.isEdit = false;
+        // editTask(task) {
+        //     this.isEdit = true;
+        //     this.id = task.id
+        //     this.taskText = task.text;
+        //     // this.isEdit = false;
 
-        }
-    }
+        // }
+    },
+    // computed:{
+    //     tasks(){
+    //         return this.$store.state.tasks;
+            
+    //     }
+    // },
 }
 </script>
 
