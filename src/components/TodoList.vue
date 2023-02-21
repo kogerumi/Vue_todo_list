@@ -4,37 +4,15 @@
         <v-container class="container">
             <v-row class="d-flex justify-center mb-6">
                 <v-col cols="12" md="4">
-                    <!-- <v-form>
-                        <v-text-field type="text" name="todo-input" placeholder="Write a task" v-model="taskText" required></v-text-field>
-                        <v-btn color="primary" @click="addTask">Add task</v-btn>
-                    </v-form> -->
-                   
-            
-                        <!-- <v-list-item> -->
-                            <todo-item  v-for="task in tasks" :key="task.id" :text="task.text"/> 
-                            
-                        
-                           <!-- {{ tasks }} -->
-                        <!-- </v-list-item> -->
-                        <!-- <h2 class="todo-title" v-if="tasks.length">Task list:</h2> -->
-                        <!-- <v-list-item class="todo-item" v-for="(task, index) in tasks" :key="task.id">
-                            <span>{{ index + 1 }}.</span>
-                            <span :class="{done:task.isComplite}"> {{ task.text }}</span>
-                            <v-list-item-action class="task-check">
-                                <v-checkbox @change="checkTask" v-model="task.isComplite" :input-value="active" color="teal darken-2"></v-checkbox>
-                            </v-list-item-action>
-                            <div class="btn-container">
-                                <v-icon class="edit-btn" @click="editTask(task)">
-                                    mdi-pencil-box-outline
-                                </v-icon>
-                                <v-icon class="delete-btn" @click="deleteTask(i)">
-                                    mdi-close-box-outline
-                                </v-icon>
-                            </div>
 
-                        </v-list-item> -->
-                       
-             
+
+                        <h2 class="todo-title" v-if="taskList.length">Task list:</h2>
+
+                  <div>Tasklist!!</div>
+                  <div  v-for="(task) in taskList" :key="task.text">
+                    {{task.text}}
+                  </div>
+
                 </v-col>
             </v-row>
         </v-container>
@@ -44,29 +22,26 @@
 </template>
 
 <script>
-import TodoItem from './TodoItem';
+// import TodoItem from './TodoItem';
 export default {
     name: 'todo-list',
 
     components: {
-        TodoItem, 
+        // TodoItem,
     },
+
 
     data() {
         return {
             tasks: this.$store.state.tasks,
-            // taskText: "",
-            // tasks: [],
-            // // task: {
-            // //     id: this.id,
-            // //     text: this.taskText,
-            // //     isComplite: this.isDone
-            // // },
-            // isDone: false,
-            // id: 0,
-            // isEdit: false
         }
     },
+  computed: {
+    taskList () {
+      console.log('COMPUTED', this.$store.state.tasks);
+      return this.$store.state.tasks;
+    }
+  },
     // mounted() {
     //     const data = localStorage.getItem('tasks');
     //     if (data) {
@@ -75,10 +50,10 @@ export default {
 
     // },
     methods: {
-    //     addTask() {
-    //         this.$store.commit('addTask')
-    // console.log(this.$store.state.tasks)
-    //     },
+addTask() {
+this.$store.commit('addTask')
+console.log(this.$store.state.tasks)
+},
             // if (this.isEdit === false) {
             //     this.id++;
             //     this.tasks.push({
@@ -107,7 +82,7 @@ export default {
             //     this.task.text = this.taskText;
 
             //     this.taskText = "";
-            //     // 
+            //     //
 
        // },
         // checkTask() {
@@ -130,7 +105,7 @@ export default {
     // computed:{
     //     tasks(){
     //         return this.$store.state.tasks;
-            
+
     //     }
     // },
 }

@@ -1,7 +1,5 @@
 <template>
 <div class="task-form">
-    <v-app>
-        <v-container>
             <v-row class="d-flex justify-center mb-6">
                 <v-col cols="12" md="4">
                     <v-form>
@@ -10,8 +8,6 @@
                     </v-form>
                 </v-col>
             </v-row>
-        </v-container>
-    </v-app>
 </div>
 </template>
 
@@ -81,7 +77,7 @@ methods: {
     //     this.task.text = this.taskText;
 
     //     this.taskText = "";
-    //     // 
+    //     //
 
 }
 }
